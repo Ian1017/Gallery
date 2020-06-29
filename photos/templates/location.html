@@ -1,1 +1,22 @@
 {% extends 'base.html' %} 
+
+
+{% block content%}
+{% load countries %}
+{% get_countries as countries %}
+
+
+<div class="input-field col s6">
+    <form action="{% url 'location' %}">
+        <select name="country">
+            <option>Select Country:</option>
+        {% for country in countries %}
+            <option value="{{ country.code }}">{{ country.name }}</option>
+        {% endfor %}
+        </select>
+        <button class="waves-effect waves-light btn" type="submit">Submit</button>
+    </form>
+</div>
+
+
+{%endblock%} 

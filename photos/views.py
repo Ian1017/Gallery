@@ -20,4 +20,5 @@ def home(request):
         return render(request, 'search.html',{"message":message})
 
 def location(request):
+    
     return render(request,'location.html') 
