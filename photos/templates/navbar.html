@@ -6,16 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <div class="navbar-fixed">
         <nav class="red lighten-3">
-                <div class="nav-wrapper">
-                  <a href="#!" class="brand-logo"><i class="material-icons">camera</i>THE GALLERY</a>
-                  <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-                    <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-                    <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-                    <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
-                  </ul>
-                </div>
-              </nav>
+          <div class="nav-wrapper">
+            <a href="{% url 'home'%}" class="brand-logo"><i class="material-icons">camera</i>THE GALLERY</a>
+            <ul class="right hide-on-med-and-down">
+    
+              <li class="nav-wrapper">
+    
+                  <form role="search" action="{% url 'search' %}">
+    
+                    <input id="search" type="search" name="search" placeholder="Search for any category" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                  </form>
+    
+              </li>
+              <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+              <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+              <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
 </body>
 </html>
