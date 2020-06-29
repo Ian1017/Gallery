@@ -1,17 +1,21 @@
 from django.db import models
+from django_countries.fields import CountryField
+
+
+
 
 #Create your models here.
 class Location(models.Model):
-    path = models.CharField(max_length=200)
+    country = CountryField(blank="select country")
 
     def __str__(self):
-        return self.path
+        return self.country
 
 class Category(models.Models):
     IMAGE_CATEGORIES = (
-        ('travel',"Travel"),
-        ('food',"Food"),
-        ('places',"Places")
+        ('travel', "Travel"),
+        ('food', "Food"),
+        ('places', "Places")
     )
     category = models.CharField(max_lenght=20, choices=IMAGE_CATEGORIES)
 
@@ -29,5 +33,3 @@ class Image(models.Model):
         return self.name
 
 
-
-        
