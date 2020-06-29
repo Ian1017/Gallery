@@ -20,5 +20,10 @@ def home(request):
         return render(request, 'search.html',{"message":message})
 
 def location(request):
-    
+
+        if 'country' in request.GET and request.GET['country']:
+        country = request.GET.get('country')
+
+
+
     return render(request,'location.html') 
