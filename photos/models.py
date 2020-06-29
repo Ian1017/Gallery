@@ -8,7 +8,7 @@ from django_countries.fields import CountryField
 class Location(models.Model):
     country = CountryField(blank="select country")
 
-    def __str__(self):
+    def __repr__(self):
         return self.country
 
 class Category(models.Models):
@@ -23,7 +23,7 @@ class Category(models.Models):
         return self.category
 
 class Image(models.Model):
-    image = models.CharField(max_length=30)
+    image = models.ImageField(upload_to='gallery/')
     name = models.CharField(max_length=30)
     category = models.ForeignKey(Category)
     description = models.TextField()
