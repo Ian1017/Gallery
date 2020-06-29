@@ -1,13 +1,139 @@
+ 
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block content %}
-<div class="row">
-    {%for image in images%}
-    <div class="col 4">
-        <img class="materialboxed" src="{{image.image.url}}" height="200" width="200">
+
+<div style="height: 100vh">
+<!--Carousel Wrapper-->
+<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-2" data-slide-to="1"></li>
+      <li data-target="#carousel-example-2" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active">
+        <div class="view">
+          <img class="d-block w-100" src="{{MEDIA_URL}}static/2.jpeg"  height="580" alt="First slide">
+          <div class="mask rgba-black-light"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Welcome to The Gallery</h3>
+          <p>We have images of all types. Scroll down to view some of the recent posts.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!--Mask color-->
+        <div class="view" >
+          <img class="d-block w-100" src="{{MEDIA_URL}}static/1.jpeg" alt="Second slide" height="580">
+          <div class="mask rgba-black-strong"></div>
+        </div>
+
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">See photos from different locations.</h3>
+          <p>You can use the search bar to find photos in categories such as Travel, Food, Movies, Places, etc. Please explore</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!--Mask color-->
+        <div class="view">
+          <img class="d-block w-100" src="{{MEDIA_URL}}static/3.jpeg"  height="580"  alt="Third slide">
+          <div class="mask rgba-black-slight"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Search photos according to Category</h3>
+          <p>Our database contains pictures from various places in the World.</p>
+        </div>
+      </div>
     </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+  </div>
+  <!--/.Carousel Wrapper-->
+</div>
+
+
+<div>
+    <i class="fab fa-mdb"></i>
+    <p>r</p>
+</div>
+
+<div class="row" style="margin-left:200px">
+
+    {%for image in images%}
+
+    <div class="view overlay zoom col-sm-3" 
+    style="margin-bottom: 15px; margin-left: 15px; background-image: url({{image.image.url}});  
+    background-position: center; background-repeat: no-repeat; background-size: cover;
+    height:300px">
+
+        <div class="mask flex-center waves-effect waves-light">
+          <p class="white-text">{{image.name}}</p>
+        </div>
+        
+        <!-- Button trigger modal -->
+`        <a style="margin-top:260px; margin-left: 205px; color: white;" type="button" class="btn-floating" data-toggle="modal" data-target="#fullHeightModalRight{{image.id}}" data-toggle="tooltip" data-placement="top"
+            title="View details">
+            <i class="fas fa-info-circle fa-2x"></i>
+          </a>
+
+          
+        <!-- Full Height Modal Right -->
+        <div class="modal fade right" id="fullHeightModalRight{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+        <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+        <div class="modal-dialog modal-full-height modal-right" role="document">
+        
+        
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title w-100" id="myModalLabel">DETAILS</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" >
+            <img src="{{image.image.url}}" class="" alt="zoom" width="380" height="400" style="object-fit: cover;">
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text">{{image.name}}</p>
+            </div>
+
+
+            <div class="container" style="margin-top: 30px;">
+              <p class="black-text"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="View details"></i>{{image.description}}</p>
+              <p class="black-text"><i class="fas fa-globe-africa"></i>{{image.location.country.name}}</p>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <a href="{% url 'copy_image' image.id %}" class="btn aqua-gradient">Copy</a>
+          </div>
+        </div>
+        </div>
+        </div>
+        <!-- Full Height Modal Right -->
+    </div>
+
+    
     {%empty%}
     <p>No images</p>
-    {%endfor%}      
+    {%endfor%}         
 </div>
+
+
+
+
+
+
 {% endblock %}
