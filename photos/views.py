@@ -9,9 +9,9 @@ def home(request):
 
     def search(request):
     if 'search' in request.GET and request.GET['search']:
-        search_term = request.GET.get('search')
-        searched_images = Image.objects.all()
-        print(searched_images)
+        search_term = request.GET.get('search').lower()
+        category = Category.find_category_id(search_term)
+        searched_images = Image.search_image(category)
         message = f"{search_term}" 
 
         return render(request, 'search.html',{"message":message, "images":searched_images})

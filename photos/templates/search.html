@@ -3,7 +3,7 @@
 {%block content%}
 <div class="row">
         {% if images %}
-          <h2>Found {{ images|length }} of searched term {{message}}</h2>
+          <h2>Results for {{message}}:</h2>
         {% else %}
           <h2> Found 0 articles for the search term {{message}}</h2>
         {% endif %}
@@ -14,9 +14,10 @@
         <div class="container carousel">
         {%for image in images%}
         <div class="col s3">
-          <p>{{image.category.category}}</p>
+          <p>{{image.location.country.name}}</p>
             <img class="materialboxed" data-caption="{{image.name}}" src="{{image.image.url}}" height="200" width="200">
         </div>
+        {%endif%}
         {%empty%}
         <p>No images</p>
         {%endfor%}

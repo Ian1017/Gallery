@@ -15,13 +15,20 @@ class Category(models.Models):
     IMAGE_CATEGORIES = (
         ('travel', "Travel"),
         ('food', "Food"),
-        ('places', "Places")
+        ('places', "Places"),
+        ('people', 'People'),
+        ('sports', 'Sports'),
     )
     category = models.CharField(max_lenght=20, choices=IMAGE_CATEGORIES)
 
     @classmethod
     def search_by_category(cls, category):
         category = cls.objects.filter(category = category)
+        return category
+
+    @classmethod
+    def find_category_id(cls,category):
+        category = cls.objects.filter(category=category)
         return category
 
     def __str__(self):
@@ -35,7 +42,7 @@ class Image(models.Model):
     location = models.ForeignKey(Location, on_delete = models.CASCADE, related_name='img_location')
 
     @classmethod
-    def search_images(cls,category):
+    def search_image(cls,category):
         images = cls.objects.filter(category = category)
         return images
 
