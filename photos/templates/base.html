@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    {% if title %}
+    <title>The Gallery - {{title}}</title>
+    {% else %}
+      <title> The Gallery </title>
+    {% endif %}
+
+    <!--Import materialize.css-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'materialize/bin/materialize.css' %}"  media="screen,projection"/>
+</head>
+</head>
+<body>
+    {%include 'navbar.html'%}
+
+
+    {%block content%}  {%endblock%}
+
+
+    {% block script%}
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'materialize/bin/materialize.js' %}"></script>
+    {% endblock%}
+</body>
+</html>
