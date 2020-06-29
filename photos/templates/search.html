@@ -1,0 +1,25 @@
+{%extends 'base.html' %}
+
+{%block content%}
+<div class="row">
+        {% if images %}
+          <h2>Found {{ images|length }} of searched term {{message}}</h2>
+        {% else %}
+          <h2> Found 0 articles for the search term {{message}}</h2>
+        {% endif %}
+
+</div>
+
+<div class="row">
+        <div class="container carousel">
+        {%for image in images%}
+        <div class="col s3">
+          <p>{{image.category.category}}</p>
+            <img class="materialboxed" data-caption="{{image.name}}" src="{{image.image.url}}" height="200" width="200">
+        </div>
+        {%empty%}
+        <p>No images</p>
+        {%endfor%}
+        </div>             
+</div>
+{%endblock%}

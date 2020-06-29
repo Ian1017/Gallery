@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Image, Category, Location
 
@@ -6,3 +6,15 @@ from .models import Image, Category, Location
 def home(request):
     images = Image.objects.all()
     return render(request, 'home.html', {"images":images})
+
+    def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        searched_images = Image.objects.all()
+        print(searched_images)
+        message = f"{search_term}" 
+
+        return render(request, 'search.html',{"message":message, "images":searched_images})
+    else:
+        message = "No results."
+        return render(request, 'search.html',{"message":message})
