@@ -1,7 +1,11 @@
 from django.db import models
 from django_countries.fields import CountryField
+from fontawesome_5.fields import IconField
 
 
+#FOR FONT-AWESOME
+class FontAwesome(models.Model):
+    icon = IconField()
 
 
 #Create your models here.
@@ -23,11 +27,11 @@ class Category(models.Models):
 
     @classmethod
     def search_by_category(cls, category):
-        category = cls.objects.filter(category = category)
+        category = cls.objects.filter(category =category)
         return category
 
     @classmethod
-    def find_category_id(cls,category):
+    def find_category_id(cls, category):
         category = cls.objects.filter(category=category)
         return category
 
@@ -42,7 +46,7 @@ class Image(models.Model):
     location = models.ForeignKey(Location, on_delete = models.CASCADE, related_name='img_location')
 
     @classmethod
-    def search_image(cls,category):
+    def search_image(cls, category):
         images = cls.objects.filter(category = category)
         return images
 
