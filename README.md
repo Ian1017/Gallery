@@ -69,4 +69,4 @@ As a user I can:
 * Postgres SQL
 
 ## License
-[Ray Ndegwa](https://github.com/ian1017/)
+[Ian Mdawida](https://github.com/ian1017/)
