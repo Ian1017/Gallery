@@ -1,26 +1,75 @@
 {%extends 'base.html' %}
 
 {%block content%}
-<div class="row">
+<div class="row" style="margin-top: 100px; margin-left:50px">
         {% if images %}
-          <h2>Results for {{message}}:</h2>
+        <div class="container">
+            <h4>Results for '{{message}}'':</h4>
+        </div>
         {% else %}
-          <h2> Found 0 articles for the search term {{message}}</h2>
+          <div class="container">
+            <h4> No Results for Search term '{{message}}'.</h4>
+            <p> Use these categories: Places, People, Food, Travel and Sports.</p>
+          </div>
         {% endif %}
-
 </div>
 
-<div class="row">
-        <div class="container carousel">
-        {%for image in images%}
-        <div class="col s3">
-          <p>{{image.location.country.name}}</p>
-            <img class="materialboxed" data-caption="{{image.name}}" src="{{image.image.url}}" height="200" width="200">
+<div class="row" style="margin-left:200px ">
+
+  {%for image in images%}
+
+  <div class="view overlay zoom col-sm-3" 
+  style="margin-bottom: 15px; margin-left: 15px; background-image: url({{image.image.url}});  
+  background-position: center; background-repeat: no-repeat; background-size: cover;
+  height:300px">
+
+      <div class="mask flex-center waves-effect waves-light">
+        <p class="white-text">{{image.name}}</p>
+      </div>
+      
+      <!-- Button trigger modal -->
+`        <a style="margin-top:260px; margin-left: 205px; color: white;" type="button" class="btn-floating" data-toggle="modal" data-target="#fullHeightModalRight{{image.id}}" data-toggle="tooltip" data-placement="top"
+          title="View details">
+          <i class="fas fa-info-circle fa-2x"></i>
+        </a>
+
+        
+      <!-- Full Height Modal Right -->
+      <div class="modal fade right" id="fullHeightModalRight{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+      <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+      <div class="modal-dialog modal-full-height modal-right" role="document">
+      
+      
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel">DETAILS</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        {%endif%}
-        {%empty%}
-        <p>No images</p>
-        {%endfor%}
-        </div>             
+
+        <div class="modal-body" >
+          <img src="{{image.image.url}}" class="" alt="zoom" width="380" height="400" style="object-fit: cover;">
+          <div class="mask flex-center waves-effect waves-light">
+            <p class="white-text">{{image.name}}</p>
+          </div>
+
+          <div class="container" style="margin-top: 30px;">
+            <p class="black-text"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="View details"></i>{{image.description}}</p>
+            <p class="black-text"><i class="fas fa-globe-africa"></i>{{image.location.country.name}}</p>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <a href="{% url 'copy_image' image.id %}" class="btn aqua-gradient">Copy</a>
+        </div>
+      </div>
+      </div>
+      </div>
+      <!-- Full Height Modal Right -->
+  </div>
+
+  {%endfor%}         
 </div>
 {%endblock%}
